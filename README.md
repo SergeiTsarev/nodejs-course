@@ -1,3 +1,3 @@
-# typescript-backend-template
+# node.js mentoring program
 
-This project is a simple template for the nodejs project which includes typescript and jest.
+This project is a simple nodejs project which includes typescript and jest.
