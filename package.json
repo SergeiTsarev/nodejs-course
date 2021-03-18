@@ -2,10 +2,10 @@
   "name": "nodejs-mentoring-program",
   "version": "1.0.0",
   "description": "A repo for node.js learning purposes",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
-    "start": "node index.js",
+    "start": "node index.ts",
     "start:watch": "nodemon",
     "start:watch-debug": "nodemon --config nodemon-debug.json",
     "lint": "eslint src/**/*.ts",
@@ -13,7 +13,8 @@
     "tsc-check": "tsc --noEmit",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:cov": "jest --coverage"
+    "test:cov": "jest --coverage",
+    "task-1-1": "nodemon ./src/task-1-1.ts"
   },
   "repository": {
     "type": "git",
