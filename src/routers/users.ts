@@ -7,17 +7,21 @@ import { userSchemas } from '../validation/user.schema';
 
 const router = Router();
 
-router.get('/auto-suggest', validate(userSchemas.autoSuggest, 'query'), (req, res) => {
+router.get('/', async (req, res) => {
+  res.send(await UserService.getAllUsers());
+});
+
+router.get('/auto-suggest', validate(userSchemas.autoSuggest, 'query'), async (req, res) => {
   const { login = '', limit = 10 } = req.query;
-  const autoSuggestedUsers = UserService.getAutoSuggestUsers(String(login), Number(limit));
+  const autoSuggestedUsers = await UserService.getAutoSuggestUsers(String(login), Number(limit));
 
   return res.json({ users: autoSuggestedUsers });
 });
 
-router.get('/:id', validate(userSchemas.userId, 'params'), (req, res) => {
+router.get('/:id', validate(userSchemas.userId, 'params'), async (req, res) => {
   const { id } = req.params;
 
-  const user = UserService.getUserByID(id);
+  const user = await UserService.getUserByID(id);
 
   if (!user) {
     return generateResponseError(res, 'User with that ID does not exist');
@@ -26,10 +30,10 @@ router.get('/:id', validate(userSchemas.userId, 'params'), (req, res) => {
   return res.json({ user });
 });
 
-router.post('/', validate(userSchemas.createUpdateUser, 'body'), (req, res) => {
+router.post('/', validate(userSchemas.createUser, 'body'), async (req, res) => {
   const { login, password, age } = <User>req.body;
 
-  const user = UserService.addUser({ login, password, age });
+  const user = await UserService.addUser({ login, password, age });
 
   return res.json({ user });
 });
@@ -37,13 +41,13 @@ router.post('/', validate(userSchemas.createUpdateUser, 'body'), (req, res) => {
 router.put(
   '/:id',
   validate(userSchemas.userId, 'params'),
-  validate(userSchemas.createUpdateUser, 'body'),
-  (req, res) => {
+  validate(userSchemas.updateUser, 'body'),
+  async (req, res) => {
     const { id } = req.params;
 
     const { login, password, age } = <User>req.body;
 
-    const updatedUser = UserService.updateUser(id, { login, password, age });
+    const [updatedUser] = await UserService.updateUser(id, { login, password, age });
 
     if (!updatedUser) {
       return generateResponseError(res, 'User with that ID does not exist');
@@ -53,10 +57,10 @@ router.put(
   },
 );
 
-router.delete('/:id', validate(userSchemas.userId, 'params'), (req, res) => {
+router.delete('/:id', validate(userSchemas.userId, 'params'), async (req, res) => {
   const { id } = req.params;
 
-  const deletedUser = UserService.deleteUser(id);
+  const deletedUser = await UserService.deleteUser(id);
 
   if (!deletedUser) {
     return generateResponseError(res, 'User with that ID does not exist');

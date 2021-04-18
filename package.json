@@ -13,7 +13,11 @@
     "tsc-check": "tsc --noEmit",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:cov": "jest --coverage"
+    "test:cov": "jest --coverage",
+    "db:model": "sequelize-cli model:generate --name User --attributes login:string,password:string,age:integer",
+    "db:migrate": "sequelize-cli db:migrate",
+    "db:seed": "sequelize-cli db:seed:all",
+    "db:migrate:undo": "sequelize-cli db:migrate:undo:all"
   },
   "repository": {
     "type": "git",
@@ -51,6 +55,7 @@
     "lint-staged": "^10.5.4",
     "nodemon": "^2.0.7",
     "prettier": "^2.2.1",
+    "sequelize-cli": "^6.2.0",
     "ts-jest": "^26.5.2",
     "ts-node": "^9.1.1",
     "typescript": "~4.1.5"
@@ -102,6 +107,9 @@
   "dependencies": {
     "express": "^4.17.1",
     "joi": "^17.4.0",
+    "pg": "^8.6.0",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^6.6.2",
     "uuid": "^8.3.2"
   }
 }
