@@ -1,0 +1,9 @@
+{
+  "development": {
+    "username": "Sergei_Tsarev",
+    "database": "Sergei_Tsarev",
+    "host": "localhost",
+    "dialect": "postgres",
+    "port": "5432"
+  }
+}

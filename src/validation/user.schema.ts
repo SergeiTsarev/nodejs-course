@@ -1,7 +1,7 @@
 import Joi from 'joi';
 
 export const userSchemas = {
-  createUpdateUser: Joi.object({
+  createUser: Joi.object({
     login: Joi.string().required(),
     password: Joi.string()
       .pattern(new RegExp('^(?=.*d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{3,}$'))
@@ -14,5 +14,12 @@ export const userSchemas = {
   autoSuggest: Joi.object({
     login: Joi.string().required(),
     limit: Joi.number().integer().min(1),
+  }),
+  updateUser: Joi.object({
+    login: Joi.string(),
+    password: Joi.string().pattern(
+      new RegExp('^(?=.*d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{3,}$'),
+    ),
+    age: Joi.number().integer().min(4).max(130),
   }),
 };
