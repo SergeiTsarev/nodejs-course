@@ -10,31 +10,10 @@ const { database, username, password, ...options } = configs[env] as DBConfig;
 
 const logger: (msg: string) => void = (...msg) => console.log(msg);
 
-let sequelize: Sequelize;
-
-if (process.env.DATABASE_URL) {
-  sequelize = new Sequelize(process.env.DATABASE_URL, {
-    ssl: true,
-    dialectOptions: {
-      ssl: {
-        require: true,
-        rejectUnauthorized: false,
-      },
-    },
-  });
-} else {
-  sequelize = new Sequelize(database, username, password, {
-    ...options,
-    logging: logger,
-    ssl: true,
-    dialectOptions: {
-      ssl: {
-        require: true,
-        rejectUnauthorized: false,
-      },
-    },
-  });
-}
+const sequelize = new Sequelize(database, username, process.env.DB_PASSWORD, {
+  ...options,
+  logging: logger,
+});
 
 sequelize.authenticate().then((msg) => console.log(msg));
 

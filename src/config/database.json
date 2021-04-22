@@ -1,12 +1,9 @@
 {
   "development": {
-    "username": "vpjokzghextlsa",
-    "database": "d2lnq4fvo4qae4",
-    "host": "ec2-52-50-171-4.eu-west-1.compute.amazonaws.com",
+    "username": "qnkolzix",
+    "database": "qnkolzix",
+    "host": "rogue.db.elephantsql.com",
     "dialect": "postgres",
     "port": "5432"
-  },
-  "production": {
-    "use_env_variable": "DATABASE_URL"
   }
 }
