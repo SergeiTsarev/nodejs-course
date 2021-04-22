@@ -10,7 +10,7 @@ const { database, username, password, ...options } = configs[env] as DBConfig;
 
 const logger: (msg: string) => void = (...msg) => console.log(msg);
 
-let sequelize = null;
+let sequelize: Sequelize;
 
 if (process.env.DATABASE_URL) {
   sequelize = new Sequelize(process.env.DATABASE_URL);
